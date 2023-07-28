@@ -1,10 +1,13 @@
 const express = require("express")
+require("dotenv").config()
+
 const app = express()
 const PORT = process.env.PORT || 4000
 const mongoose = require("mongoose")
 const URL2 = "mongodb+srv://ermaanish:manish_singh@cluster0.5okciwd.mongodb.net/?retryWrites=true&w=majority" 
 
-mongoose.connect(URL2,{
+console.log(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI,{
     useNewUrlParser:true,
     useUnifiedTopology:true
 }).then(()=>{
