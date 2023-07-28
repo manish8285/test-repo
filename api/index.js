@@ -17,50 +17,50 @@ mongoose.connect(process.env.DB_URI,{
 }).catch(e=>console.log("connection to database failed"))
 
 
-// const userSchema= mongoose.Schema({name:{
-//     type:String,
-//     required:true,
-//     minlength:3
-// },
-//     email:{
-//         type:String,
-//         required:true,
-//         unique:[true,"Email id is already present"],
-//         validate(value){
-//             if(!validator.isEmail(value)){
-//                 throw new Error("Invalid Email")
-//             }
-//         }
-//     },
-// phone:{
-//     type:Number,
-//     min:10,
-//     required:true,
-//     unique:true
-// }
+const userSchema= mongoose.Schema({name:{
+    type:String,
+    required:true,
+    minlength:3
+},
+    email:{
+        type:String,
+        required:true,
+        unique:[true,"Email id is already present"],
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error("Invalid Email")
+            }
+        }
+    },
+phone:{
+    type:Number,
+    min:10,
+    required:true,
+    unique:true
+}
 
-// })
+})
 
-//  const personModel =new mongoose.model("person",userSchema)
+ const personModel =new mongoose.model("person",userSchema)
  
 
-// app.post("/person",(req,res)=>{
-//     const p1 =new personModel(req.body)
-//     p1.save().then(()=>{
-//         res.status(200).send("person saved successfully")
-//     }).catch(()=>{
-//         res.status(400).send("Something went wrong")
-//     })
-// })
+app.post("/person",(req,res)=>{
+    const p1 =new personModel(req.body)
+    p1.save().then(()=>{
+        res.status(200).send("person saved successfully")
+    }).catch(()=>{
+        res.status(400).send("Something went wrong")
+    })
+})
 
-// app.get("/persons",(req,res)=>{
+app.get("/persons",(req,res)=>{
     
-//     personModel.find({}).then((data)=>{
-//         res.json(data)
-//     }).catch(e=>{
-//         res.status(401).send("Something went wrong")
-//     })
-// })
+    personModel.find({}).then((data)=>{
+        res.json(data)
+    }).catch(e=>{
+        res.status(401).send("Something went wrong")
+    })
+})
 
 
 
